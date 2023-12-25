@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="./css/style.css">
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="./img/applepixel.png">
+<title>Apple game</title>
+<div id="grass"></div>
+<div id="apple" onclick="collect()"></div>
+<div id="sun"></div>
+<div id="apples-collected"><span id="text1">APPLES COLLECTED:<br>0</span></div>
+<div id="diffbar">
+    <div class="diff1" onclick="easy1()">EASY</div>
+    <div class="diff1" onclick="normal1()">NORMAL</div>
+    <div class="diff1" onclick="hard1()">HARD</div>
+</div>
+
+<audio id="consume1">
+    <source src="./audio/apple_bite.mp3" type="audio/mp3">
+</audio>
+
+<script>
+    var c = 2;
+    function start(){
+        document.getElementById("apple").style.transition = "1s";
+        document.getElementById("apple").style.top = "68%";
+    }
+    function stop(){ 
+        a = Math.random() * 10;
+        b = Math.floor(a);
+        b = b * 10 + '%'
+        document.getElementById("apple").style.display = "block";
+        document.getElementById("apple").style.transition = "0s";
+        document.getElementById("apple").style.top = "-30px";
+        document.getElementById("apple").style.left = b;
+    }
+    var san = 0
+    function fall(){
+        if (san == 1){
+            start();
+        }
+        if(san >= c){
+            stop();
+            san = 0
+        }
+        san++
+        console.log(san)
+    }
+    setInterval(fall,1000);
+    var apple = 1;
+    function collect(){
+        document.getElementById("apple").style.display = "none";
+        document.getElementById("text1").innerHTML = "APPLES COLLECTED:<br>" + apple;
+        document.getElementById("consume1").play();
+        apple++
+    }
+    function easy1(){
+        c = 4;
+    }
+    function normal1(){
+        c = 3;
+    }
+    function hard1(){
+        c = 2;
+    }
+</script>
